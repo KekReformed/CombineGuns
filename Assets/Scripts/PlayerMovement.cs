@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float acceleration;
-    [SerializeField] private float decceleration;
+    public float acceleration;
+    public float decceleration;
+
     [SerializeField] private float speedCap;
     [SerializeField] private float jumpVelocity;
     [SerializeField] private float jumpCutoffVelocity;

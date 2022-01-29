@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BasicProjectile : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed;
+    public float bulletSpeed;
     private Rigidbody2D body;
 
     private void Start()
