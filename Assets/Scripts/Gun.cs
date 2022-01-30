@@ -172,17 +172,17 @@ public class Gun : MonoBehaviour
 		if (charged)
         {
 			GameObject bulletClone = Instantiate(chargedBulletPrefab, firePoint.position, firePoint.rotation);
-			SetParameters(bulletClone, fireTarget, bulletSpeed, bouncy);
+			SetParameters(bulletClone, fireTarget, bulletSpeed);
 		}
         else
         {
 			GameObject bulletClone = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-			SetParameters(bulletClone, fireTarget, bulletSpeed, bouncy);
+			SetParameters(bulletClone, fireTarget, bulletSpeed);
 		}
 	}
 
 
-	private void SetParameters(GameObject bulletClone, Transform fireTarget, float bulletSpeed, bool bouncy)
+	private void SetParameters(GameObject bulletClone, Transform fireTarget, float bulletSpeed)
     {
 		bulletClone.GetComponent<BasicProjectile>().fireTarget = fireTarget;
 		bulletClone.GetComponent<BasicProjectile>().bulletSpeed = bulletSpeed;
@@ -198,7 +198,7 @@ public class Gun : MonoBehaviour
 			for (int i = 0; i < 3; i++)
 			{
 				GameObject bulletClone = Instantiate(chargedBulletPrefab, firePoint.position, firePoint.rotation);
-				SetParameters(bulletClone, fireTarget, bulletSpeed, bouncy);
+				SetParameters(bulletClone, fireTarget, bulletSpeed);
 				yield return new WaitForSeconds(burstInterval);
 			}
 		}
@@ -208,7 +208,7 @@ public class Gun : MonoBehaviour
 			for (int i = 0; i < 3; i++)
 			{
 				GameObject bulletClone = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-				SetParameters(bulletClone, fireTarget, bulletSpeed, bouncy);
+				SetParameters(bulletClone, fireTarget, bulletSpeed);
 				yield return new WaitForSeconds(burstInterval);
 			}
 		}
