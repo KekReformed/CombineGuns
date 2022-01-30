@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
 	[SerializeField] private float recoil;
 	[SerializeField] private float recoilTime;
 	[SerializeField] private float damage;
+	[SerializeField] private int bounceLimit;
 	[SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private GameObject chargedBulletPrefab;
 	[SerializeField] private Rigidbody2D playerBody;
@@ -186,6 +187,7 @@ public class Gun : MonoBehaviour
 		bulletClone.GetComponent<BasicProjectile>().fireTarget = fireTarget;
 		bulletClone.GetComponent<BasicProjectile>().bulletSpeed = bulletSpeed;
 		bulletClone.GetComponent<BasicProjectile>().bouncy = bouncy;
+		bulletClone.GetComponent<BasicProjectile>().bounceLimit = bounceLimit;
 	}
 
 

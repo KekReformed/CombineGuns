@@ -6,8 +6,8 @@ public class BasicProjectile : MonoBehaviour
 	public bool bouncy = false;
 	public Rigidbody2D body;
 	public Transform fireTarget;
+	public int bounceLimit;
 
-	[SerializeField] private int bounceLimit;
 	private int collisionCount = 0;
 	private CircleCollider2D circleCollider;
 

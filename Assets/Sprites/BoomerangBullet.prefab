@@ -170,9 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
-  fireTargetName: 
   bouncy: 0
   body: {fileID: 0}
-  firedFrom: {x: 0, y: 0}
+  fireTarget: {fileID: 0}
   bounceLimit: 0
   returnTime: 1
