@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3763295837723152883}
   - component: {fileID: 3763295837723152880}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Orbiter (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3763295838109352912}
   - component: {fileID: 3763295838109352915}
   - component: {fileID: 3763295838109352914}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OrbiterShot
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -227,6 +227,7 @@ MonoBehaviour:
   bulletSpeed: 20
   fireTargetName: 
   bouncy: 0
+  bounceLimit: 0
   rotationSpeed: 10
 --- !u!1 &3763295839000196221
 GameObject:
@@ -238,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3763295839000196194}
   - component: {fileID: 3763295839000196195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Orbiter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

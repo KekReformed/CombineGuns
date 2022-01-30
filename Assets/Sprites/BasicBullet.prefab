@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3090903673973085122}
   - component: {fileID: 3090903673973085123}
   - component: {fileID: 3090903673973085120}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasicBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -118,8 +118,8 @@ CircleCollider2D:
   m_GameObject: {fileID: 3090903673973085121}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_Material: {fileID: 6200000, guid: d789d250841801446a9a58c964bae410, type: 2}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -140,3 +140,4 @@ MonoBehaviour:
   bulletSpeed: 20
   fireTargetName: 
   bouncy: 1
+  bounceLimit: 2
