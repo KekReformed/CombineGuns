@@ -26,6 +26,9 @@ public class Gun : MonoBehaviour
 	private float cooldownTimer;
 	private float chargeAmount = 0;
 	private float recoilTimer;
+	private float attackCooldownModifier = 1;
+	private float damageModifier = 1;
+	private float recoilModifier = 1;
 	private bool resetAccelerations = true;
 
 	private void Awake()
@@ -42,38 +45,43 @@ public class Gun : MonoBehaviour
 		//FireMode
 		if (boltAction)
         {
-			attackCooldown *= 2.5f;
-			damage *= 2f;
-			recoil *= 1.05f;
+			attackCooldownModifier += 1.5f;
+			damageModifier += 1f;
+			recoilModifier += 0.05f;
 		}
 
 		if (multishot)
 		{
-			attackCooldown *= 1.5f;
-			damage *= 0.25f;
-			recoil *= 1.2f;
+			attackCooldownModifier += 0.5f;
+			damageModifier += -0.75f;
+			recoilModifier += 0.2f;
 		}
 
 		if (semiAuto)
 		{
-			attackCooldown *= 1f;
-			damage *= 1f;
-			recoil *= 1f;
+			attackCooldown += 0f;
+			damageModifier += 0f;
+			recoilModifier += 0f;
 		}
 
 		if (burst)
 		{
-			attackCooldown *= 1f;
-			damage *= 0.4f;
-			recoil *= 0.6f;
+			attackCooldown += 0f;
+			damageModifier += -0.6f;
+			recoilModifier += -0.4f;
 		}
 
 		if (automatic)
         {
-			attackCooldown *= 0.75f;
-			damage *= 0.8f;
-			recoil *= 1;
+			attackCooldownModifier += -0.25f;
+			damageModifier += -0.2f;
+			recoilModifier += 0f;
         }
+
+		attackCooldown *= attackCooldownModifier;
+		damage *= damageModifier;
+		recoil *= recoilModifier;
+		recoilTime *= recoilModifier*2;
 	}
 
 	private void Update()
@@ -95,6 +103,7 @@ public class Gun : MonoBehaviour
 			if (Input.GetButton("Charged Shot"))
             {
 				chargeAmount += Time.deltaTime;
+				Debug.Log("Chargin! " + chargeAmount);
 			}
 
             if (Input.GetButtonUp("Charged Shot"))
