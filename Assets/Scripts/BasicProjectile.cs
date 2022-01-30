@@ -3,21 +3,22 @@ using UnityEngine;
 public class BasicProjectile : MonoBehaviour
 {
 	public float bulletSpeed;
-	public string fireTargetName;
 	public bool bouncy = false;
+	public Rigidbody2D body;
+	public Transform fireTarget;
 
 	[SerializeField] private int bounceLimit;
-
-	private Rigidbody2D body;
 	private int collisionCount = 0;
 	private CircleCollider2D circleCollider;
 
 	private void Start()
 	{
-		body = this.GetComponent<Rigidbody2D>();
+		body = GetComponent<Rigidbody2D>();
 		circleCollider = GetComponent<CircleCollider2D>();
-		Vector2 fireTargetPosition = new Vector2(GameObject.Find(fireTargetName).transform.position.x, GameObject.Find(fireTargetName).transform.position.y);
-		body.velocity = (fireTargetPosition - body.position)*bulletSpeed;
+
+		Vector2 fireTargetPosition = new Vector2(fireTarget.position.x, fireTarget.position.y);
+
+		body.velocity = (fireTargetPosition - body.position) * bulletSpeed;
 
 		if (bouncy)
 		{

@@ -226,8 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 20
   fireTargetName: 
-  bouncy: 0
-  bounceLimit: 0
+  bouncy: 1
+  bounceLimit: 2
   rotationSpeed: 10
 --- !u!1 &3763295839000196221
 GameObject:

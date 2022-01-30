@@ -1,12 +1,10 @@
 using UnityEngine;
 public class OrbiterProjectile : BasicProjectile
 {
-    private float rotation;
     [SerializeField] private float rotationSpeed;
 
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().rotation += rotationSpeed;
+        transform.Rotate(gameObject.transform.rotation.x, gameObject.transform.rotation.y, bulletSpeed/2);
     }
-
 }
