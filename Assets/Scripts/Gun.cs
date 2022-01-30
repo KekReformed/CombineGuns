@@ -34,12 +34,12 @@ public class Gun : MonoBehaviour
 	{
 		if (cooldownTimer > attackCooldown)
 		{
-			if (Input.GetMouseButtonDown(0) && automatic == false)
+			if (Input.GetButtonDown("Shoot") && automatic == false)
 			{
 				Shoot(recoil,burst,multishot);
 			}
 
-			if (Input.GetMouseButton(0) && automatic == true)
+			if (Input.GetButtonDown("Shoot") && automatic == true)
 			{
 				Shoot(recoil,burst,multishot);
 			}

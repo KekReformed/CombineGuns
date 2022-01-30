@@ -77,13 +77,13 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Jumping
-        if (Input.GetKeyDown(KeyCode.Space) && OnGround())
+        if (Input.GetButtonDown("Jump") && OnGround())
         {
             isJumping = true;
             body.velocity = new Vector2(body.velocity.x, jumpVelocity);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetButtonUp("Jump"))
         {
             if (isJumping && body.velocity.y > 0)
             {
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
                 body.velocity = new Vector2(body.velocity.x, -2.5f);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Jump"))
             {
 
                 if (direction == "left")
