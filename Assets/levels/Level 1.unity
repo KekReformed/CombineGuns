@@ -1415,17 +1415,17 @@ MonoBehaviour:
   recoilTime: 0.1
   damage: 0
   bounceLimit: 2
-  bulletPrefab: {fileID: 8798958523371060885, guid: 37a0788dcd1810440aff77295e98f324,
+  bulletPrefab: {fileID: 3763295838109352941, guid: 007bcfeafec76384f9a6a85a8c75c31f,
     type: 3}
   chargedBulletPrefab: {fileID: 91961236306708245, guid: 7df37506cc64f5f43977c3d342f0df95,
     type: 3}
   playerBody: {fileID: 269317715}
   player: {fileID: 269317719}
-  boltAction: 1
-  multishot: 1
-  semiAuto: 0
+  boltAction: 0
+  multishot: 0
+  semiAuto: 1
   burst: 0
-  automatic: 1
+  automatic: 0
   bouncy: 0
 --- !u!1 &1576508237
 GameObject:
@@ -1565,75 +1565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c29eb972cf08b4fa464a0a817cc44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1873954606
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083918653700243543, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5289173482673525301, guid: 027db5ce1ff2f4142b49c3de3b59625a,
-        type: 3}
-      propertyPath: m_Name
-      value: TP Ground
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 027db5ce1ff2f4142b49c3de3b59625a, type: 3}
 --- !u!1 &1920168915
 GameObject:
   m_ObjectHideFlags: 0
