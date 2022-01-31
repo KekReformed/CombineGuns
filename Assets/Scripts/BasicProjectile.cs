@@ -6,7 +6,6 @@ public class BasicProjectile : MonoBehaviour
 	public int bounceLimit;
 	private int collisionCount = 0;
 	public bool bouncy = false;
-	public Vector2 firedFrom;
 	public Rigidbody2D body;
 	public Transform fireTarget;
 	private CircleCollider2D circleCollider;
@@ -15,8 +14,6 @@ public class BasicProjectile : MonoBehaviour
 	{
 		body = GetComponent<Rigidbody2D>();
 		circleCollider = GetComponent<CircleCollider2D>();
-
-		firedFrom = body.position;
 
 		Vector2 fireTargetPosition = new Vector2(fireTarget.position.x, fireTarget.position.y);
 
@@ -30,7 +27,7 @@ public class BasicProjectile : MonoBehaviour
 		}
 	}
 
-	private void Update()
+	public void Update()
 	{
 		//Deletes the projectile if its off screen
 		if (!GetComponent<Renderer>().isVisible)

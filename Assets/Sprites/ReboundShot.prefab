@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8798958523371060887}
   - component: {fileID: 8798958523371060886}
   m_Layer: 7
-  m_Name: BoomerangBullet
+  m_Name: ReboundShot
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: d789d250841801446a9a58c964bae410, type: 2}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -170,8 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
+  bounceLimit: 0
   bouncy: 0
+  firedFrom: {x: 0, y: 0}
   body: {fileID: 0}
   fireTarget: {fileID: 0}
-  bounceLimit: 0
   returnTime: 1

@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Left and right decceleration
-        if (Input.GetAxisRaw("Horizontal") == 0)
+        if (Input.GetAxisRaw("Horizontal") == 0 || Mathf.Abs(body.velocity.x) > speedCap)
         {
             //Left decceleration
             if (body.velocity.x > 0)

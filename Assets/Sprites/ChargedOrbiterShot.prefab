@@ -732,7 +732,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: d789d250841801446a9a58c964bae410, type: 2}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -751,9 +751,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
-  fireTargetName: FireTarget
-  bouncy: 1
   bounceLimit: 2
+  bouncy: 1
+  firedFrom: {x: 0, y: 0}
+  body: {fileID: 0}
+  fireTarget: {fileID: 0}
   rotationSpeed: 10
 --- !u!1 &91961236337522025
 GameObject:
