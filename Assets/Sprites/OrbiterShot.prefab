@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5188267400377122246}
   - component: {fileID: 7888366368453749503}
+  - component: {fileID: 7439146071472750878}
+  - component: {fileID: 1866249295883949221}
   m_Layer: 7
   m_Name: Orbiter (3)
   m_TagString: Untagged
@@ -85,6 +87,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7439146071472750878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627207614088631137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8e3f1e3449a4348a568c9a4ecadab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &1866249295883949221
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627207614088631137}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.49999997
 --- !u!1 &3292166664180585845
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +125,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2022989784495619713}
   - component: {fileID: 974857490777798913}
+  - component: {fileID: 4627023114125208659}
+  - component: {fileID: 3405210978362943148}
   m_Layer: 7
   m_Name: Orbiter (2)
   m_TagString: Untagged
@@ -170,6 +202,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4627023114125208659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3292166664180585845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8e3f1e3449a4348a568c9a4ecadab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &3405210978362943148
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3292166664180585845}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.49999997
 --- !u!1 &3763295837723152882
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +240,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3763295837723152883}
   - component: {fileID: 3763295837723152880}
+  - component: {fileID: 6634707383086969727}
+  - component: {fileID: 5062063560699002552}
   m_Layer: 7
   m_Name: Orbiter (1)
   m_TagString: Untagged
@@ -255,6 +317,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6634707383086969727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3763295837723152882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8e3f1e3449a4348a568c9a4ecadab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &5062063560699002552
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3763295837723152882}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.49999997
 --- !u!1 &3763295838109352941
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +502,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3763295839000196194}
   - component: {fileID: 3763295839000196195}
+  - component: {fileID: 3304997216284456436}
+  - component: {fileID: 577322716519607317}
   m_Layer: 7
   m_Name: Orbiter
   m_TagString: Untagged
@@ -487,3 +579,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3304997216284456436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3763295839000196221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8e3f1e3449a4348a568c9a4ecadab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &577322716519607317
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3763295839000196221}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.49999997

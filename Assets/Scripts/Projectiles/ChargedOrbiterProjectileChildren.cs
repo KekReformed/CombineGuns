@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ChargedOrbiterProjectileChildren : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed;
     private float bulletSpeed;
 
     private void Start()
@@ -12,5 +11,12 @@ public class ChargedOrbiterProjectileChildren : MonoBehaviour
     void FixedUpdate()
     {
         transform.Rotate(gameObject.transform.rotation.x, gameObject.transform.rotation.y, -bulletSpeed);
+
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
     }
 }
