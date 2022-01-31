@@ -10,7 +10,7 @@ public class BasicProjectile : MonoBehaviour
 	public Transform fireTarget;
 	private CircleCollider2D circleCollider;
 
-	private void Start()
+	public void Start()
 	{
 		body = GetComponent<Rigidbody2D>();
 		circleCollider = GetComponent<CircleCollider2D>();

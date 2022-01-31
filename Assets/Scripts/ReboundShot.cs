@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class ReboundShot : BasicProjectile
 {
-    [SerializeField] private float returnTime;
-
-    private float timeCount = 0;
     private bool rebounding = false;
     private Vector2 reboundPoint;
 
@@ -24,6 +21,7 @@ public class ReboundShot : BasicProjectile
 
             Transform reboundPointTransform = gameObject.transform.Find("ReturnPoint");
             reboundPoint = new Vector2(reboundPointTransform.position.x, reboundPointTransform.position.y);
+
             body.velocity = (reboundPoint - body.position) * bulletSpeed;
             rebounding = true;
         }
