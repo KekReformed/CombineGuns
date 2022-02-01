@@ -140,7 +140,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &8798958523371060887
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -172,7 +172,5 @@ MonoBehaviour:
   bulletSpeed: 20
   bounceLimit: 0
   bouncy: 0
-  firedFrom: {x: 0, y: 0}
   body: {fileID: 0}
   fireTarget: {fileID: 0}
-  returnTime: 1

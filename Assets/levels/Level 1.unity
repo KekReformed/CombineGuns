@@ -302,9 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8d158d7b241f64ab7dfb59c6cdca43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0.75
-  decceleration: 0.75
-  speedCap: 7.5
+  acceleration: 0.5
+  decceleration: 0.5
+  speedCap: 5
   jumpVelocity: 15
   jumpCutoffVelocity: 5
   walljumpHeight: 12.5
@@ -1415,9 +1415,9 @@ MonoBehaviour:
   recoilTime: 0.1
   damage: 0
   bounceLimit: 2
-  bulletPrefab: {fileID: 3763295838109352941, guid: 007bcfeafec76384f9a6a85a8c75c31f,
+  bulletPrefab: {fileID: 3241553746920119238, guid: 69e7d5f409b3bd141ae52a9257eab123,
     type: 3}
-  chargedBulletPrefab: {fileID: 91961236306708245, guid: 7df37506cc64f5f43977c3d342f0df95,
+  chargedBulletPrefab: {fileID: 1552703897221353432, guid: 7282063a52ab4bd498e85d09b2f648b8,
     type: 3}
   playerBody: {fileID: 269317715}
   player: {fileID: 269317719}
