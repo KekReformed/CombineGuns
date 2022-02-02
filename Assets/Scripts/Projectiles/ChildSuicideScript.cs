@@ -6,6 +6,9 @@ public class ChildSuicideScript : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (!transform.root.gameObject.GetComponent<BasicProjectile>().bouncy)
+        {
+            Destroy(gameObject);
+        }
     }
 }

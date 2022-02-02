@@ -11,12 +11,13 @@ public class ChargedOrbiterProjectileChildren : MonoBehaviour
     void FixedUpdate()
     {
         transform.Rotate(gameObject.transform.rotation.x, gameObject.transform.rotation.y, -bulletSpeed);
-
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (!transform.root.gameObject.GetComponent<BasicProjectile>().bouncy)
+        {
+            Destroy(gameObject);
+        }
     }
 }
