@@ -19,6 +19,12 @@ public class BasicProjectile : MonoBehaviour
 
 		body.velocity = (fireTargetPosition - body.position) * bulletSpeed;
 
+		float AngleRad = Mathf.Atan2(fireTargetPosition.y - transform.position.y, fireTargetPosition.x - transform.position.x);
+
+		float AngleDeg = (180 / Mathf.PI) * AngleRad;
+
+		transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
+
 		if (bouncy)
 		{
 			body.gravityScale = 1;

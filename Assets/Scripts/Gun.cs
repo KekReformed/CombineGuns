@@ -40,48 +40,7 @@ public class Gun : MonoBehaviour
 		{
 			Debug.Log("You need an object called FirePoint!!!");
 		}
-
-		//Stat changes depending on different things
-		//FireMode
-		if (boltAction)
-        {
-			attackCooldownModifier += 1.5f;
-			damageModifier += 1f;
-			recoilModifier += 0.05f;
-		}
-
-		if (multishot)
-		{
-			attackCooldownModifier += 0.5f;
-			damageModifier += -0.75f;
-			recoilModifier += 0.2f;
-		}
-
-		if (semiAuto)
-		{
-			attackCooldown += 0f;
-			damageModifier += 0f;
-			recoilModifier += 0f;
-		}
-
-		if (burst)
-		{
-			attackCooldown += 0f;
-			damageModifier += -0.6f;
-			recoilModifier += -0.4f;
-		}
-
-		if (automatic)
-        {
-			attackCooldownModifier += -0.25f;
-			damageModifier += -0.2f;
-			recoilModifier += 0f;
-        }
-
-		attackCooldown *= attackCooldownModifier;
-		damage *= damageModifier;
-		recoil *= recoilModifier;
-		recoilTime *= recoilModifier*2;
+		SetModifiers();
 	}
 
 	private void Update()
@@ -92,28 +51,28 @@ public class Gun : MonoBehaviour
 		{
 			if (Input.GetButtonDown("Shoot") && automatic == false)
 			{
-				Shoot(recoil,burst,multishot,false);
+				Shoot(recoil, burst, multishot, false);
 			}
 
 			if (Input.GetButton("Shoot") && automatic == true)
 			{
-				Shoot(recoil,burst,multishot,false);
+				Shoot(recoil, burst, multishot, false);
 			}
 
 			if (Input.GetButton("Charged Shot"))
-            {
+			{
 				chargeAmount += Time.deltaTime;
 				Debug.Log("Chargin! " + chargeAmount);
 			}
 
-            if (Input.GetButtonUp("Charged Shot"))
-            {
-				if (chargeAmount >= attackCooldown*3)
-                {
+			if (Input.GetButtonUp("Charged Shot"))
+			{
+				if (chargeAmount >= attackCooldown * 3)
+				{
 					Shoot(recoil * 2, burst, multishot, true);
 				}
-                else
-                {
+				else
+				{
 					Shoot(recoil, burst, multishot, false);
 				}
 				chargeAmount = 0;
@@ -199,6 +158,50 @@ public class Gun : MonoBehaviour
 		bulletClone.GetComponent<BasicProjectile>().bounceLimit = bounceLimit;
 	}
 
+	private void SetModifiers()
+    {
+		//Stat changes depending on different things
+		//FireMode
+		if (boltAction)
+		{
+			attackCooldownModifier += 1.5f;
+			damageModifier += 1f;
+			recoilModifier += 0.05f;
+		}
+
+		if (multishot)
+		{
+			attackCooldownModifier += 0.5f;
+			damageModifier += -0.75f;
+			recoilModifier += 0.2f;
+		}
+
+		if (semiAuto)
+		{
+			attackCooldown += 0f;
+			damageModifier += 0f;
+			recoilModifier += 0f;
+		}
+
+		if (burst)
+		{
+			attackCooldown += 0f;
+			damageModifier += -0.6f;
+			recoilModifier += -0.4f;
+		}
+
+		if (automatic)
+		{
+			attackCooldownModifier += -0.25f;
+			damageModifier += -0.2f;
+			recoilModifier += 0f;
+		}
+
+		attackCooldown *= attackCooldownModifier;
+		damage *= damageModifier;
+		recoil *= recoilModifier;
+		recoilTime *= recoilModifier * 2;
+	}
 
 	IEnumerator Burst(Transform fireTarget, bool charged)
 	{
