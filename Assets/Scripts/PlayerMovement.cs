@@ -4,6 +4,9 @@ public class PlayerMovement : MonoBehaviour
 {
 	public float acceleration;
 	public float decceleration;
+	public float hp = 100;
+	public float movementModifier;
+	public float movementReduction;
 
 	[SerializeField] private float speedCap;
 	[SerializeField] private float jumpVelocity;
@@ -19,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 	private Rigidbody2D body;
 	private BoxCollider2D boxCollider;
 	private float initialGravity;
+	private float initialMovementModifier = 1;
 
 
 	private void Awake()
@@ -30,6 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		movementModifier = initialMovementModifier - movementReduction;
+		movementReduction = 0;
+
+		if (movementModifier < 0)
+        {
+			movementModifier = 0;
+        }
+
 		//Grounded Check
 		if (OnGround() && body.velocity.y <= 0)
 		{
@@ -61,9 +73,11 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetButtonDown("Jump") && OnGround())
 		{
 			isJumping = true;
-			body.velocity = new Vector2(body.velocity.x, jumpVelocity);
+			body.velocity = new Vector2(body.velocity.x, jumpVelocity) * movementModifier;
 		}
 
+
+		//Jumping Cutoff
 		if (Input.GetButtonUp("Jump"))
 		{
 			if (isJumping && body.velocity.y > jumpCutoffVelocity)
@@ -75,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-		//Wall Jumping
+		//Wall Sliding and jumping
 		if (OnWall() && !OnGround())
 		{
 			if (body.velocity.y < -2.5)

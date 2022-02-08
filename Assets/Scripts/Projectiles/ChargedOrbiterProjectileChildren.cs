@@ -15,7 +15,7 @@ public class ChargedOrbiterProjectileChildren : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!transform.root.gameObject.GetComponent<BasicProjectile>().bouncy)
+        if (transform.root.gameObject.GetComponent<BasicProjectile>().element != "Bouncy")
         {
             Destroy(gameObject);
         }

@@ -30,8 +30,9 @@ public class ChargedSniperShot : BasicProjectile
         }
     }
 
-    private void FixedUpdate()
+    private new void FixedUpdate()
     {
+        base.FixedUpdate();
         if(timeOnScreen > timeOnScreenMax)
         {
             Destroy(gameObject);

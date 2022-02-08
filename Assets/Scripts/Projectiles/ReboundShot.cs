@@ -17,7 +17,7 @@ public class ReboundShot : BasicProjectile
 
             float AngleDeg = (180 / Mathf.PI) * AngleRad;
 
-            this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 180);
+            transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 180);
 
             Transform reboundPointTransform = gameObject.transform.Find("ReturnPoint");
             reboundPoint = new Vector2(reboundPointTransform.position.x, reboundPointTransform.position.y);

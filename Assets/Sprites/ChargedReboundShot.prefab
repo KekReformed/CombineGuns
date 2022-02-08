@@ -138,10 +138,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a308fc92764b6384d8364b54925823a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
+  explosionSprite: {fileID: 628134985133631871, guid: 11573d4a2219ca346a30898a7c0e5e2d,
+    type: 3}
+  element: 
+  explosionRadius: 0
+  damage: 0
   bounceLimit: 0
-  bouncy: 0
   body: {fileID: 0}
+  circleCollider: {fileID: 0}
+  bulletSpeed: 10
   fireTarget: {fileID: 0}
   bulletPrefab: {fileID: 3116470696855183229, guid: c21c92c3c813bb748af256140c8eeeb9,
     type: 3}

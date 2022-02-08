@@ -14,21 +14,22 @@ public class SniperShot : BasicProjectile
         bulletSpeed *= 0.1f;
         base.Start();
 
-        if (bouncy)
+        if (element == "Bouncy")
         {
             body.gravityScale *= 0.1f;
         }
     }
 
-    private void FixedUpdate()
+    private new void FixedUpdate()
     {
+        base.FixedUpdate();
         if (counter > timeToSpeedUp && !spedUp)
         {
             Transform fireTarget = transform.Find("FireTarget");
             Vector2 fireVector = new Vector2(fireTarget.position.x, fireTarget.position.y);
 
             body.velocity = (fireVector - body.position) * fastBulletSpeed;
-            if (bouncy)
+            if (element == "Bouncy")
             {
                 body.gravityScale = 1;
             }

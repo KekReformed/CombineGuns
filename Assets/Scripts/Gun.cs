@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
 	[SerializeField] private bool semiAuto;
 	[SerializeField] private bool burst;
 	[SerializeField] private bool automatic;
-	[SerializeField] public bool bouncy;
+	[SerializeField] private string element;
 	
 
 	private Transform firePoint;
@@ -154,7 +154,7 @@ public class Gun : MonoBehaviour
     {
 		bulletClone.GetComponent<BasicProjectile>().fireTarget = fireTarget;
 		bulletClone.GetComponent<BasicProjectile>().bulletSpeed = bulletSpeed;
-		bulletClone.GetComponent<BasicProjectile>().bouncy = bouncy;
+		bulletClone.GetComponent<BasicProjectile>().element = element;
 		bulletClone.GetComponent<BasicProjectile>().bounceLimit = bounceLimit;
 	}
 
