@@ -1,12 +1,17 @@
 using UnityEngine;
+using Photon.Pun;
+using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
+	public Vector2 velocity;
 	public float acceleration;
 	public float decceleration;
 	public float hp = 100;
 	public float movementModifier;
 	public float movementReduction;
+	public int acidLevel;
+	public bool hitbyacid;
 
 	[SerializeField] private float speedCap;
 	[SerializeField] private float jumpVelocity;
@@ -22,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 	private Rigidbody2D body;
 	private BoxCollider2D boxCollider;
 	private float initialGravity;
-	private float initialMovementModifier = 1;
 
 
 	private void Awake()
@@ -34,13 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		movementModifier = initialMovementModifier - movementReduction;
+		if (!photonView.IsMine) return;
+		movementModifier -= movementReduction;
 		movementReduction = 0;
 
 		if (movementModifier < 0)
-        {
+		{
 			movementModifier = 0;
-        }
+		}
 
 		//Grounded Check
 		if (OnGround() && body.velocity.y <= 0)
@@ -48,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 			isJumping = false;
 		}
 
-		//Left and right acceleration which communicates using the moving variable to the fixedupdate to allow for consistent movement
+		//Left and right acceleration which communicates using the moving variable to the fixedupdate to allow for consistent movement on different framerates
 		//Left acceleration
 		if (Input.GetAxisRaw("Horizontal") < 0 && body.velocity.x >= -speedCap)
 		{
@@ -63,17 +68,17 @@ public class PlayerMovement : MonoBehaviour
 			direction = "right";
 		}
 
-        else
-        {
+		else
+		{
 			moving = "none";
-        }
+		}
 
 
 		//Jumping
 		if (Input.GetButtonDown("Jump") && OnGround())
 		{
 			isJumping = true;
-			body.velocity = new Vector2(body.velocity.x, jumpVelocity) * movementModifier;
+			body.velocity = new Vector2(body.velocity.x, jumpVelocity);
 		}
 
 
@@ -82,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if (isJumping && body.velocity.y > jumpCutoffVelocity)
 			{
-				body.velocity = new Vector2(body.velocity.x, jumpCutoffVelocity);
+				body.velocity = new Vector2(body.velocity.x, jumpCutoffVelocity) * movementModifier;
 			}
 			isJumping = false;
 		}
@@ -111,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
+    private void FixedUpdate()
 	{
 
 		if (wallJumping)
@@ -129,40 +134,57 @@ public class PlayerMovement : MonoBehaviour
 			wallJumping = false;
 		}
 
+
+		//Left Acceleration
 		if (moving == "left")
-        {
-			body.velocity = new Vector2(body.velocity.x - acceleration, body.velocity.y);
+		{
+			body.velocity = new Vector2(body.velocity.x - acceleration, body.velocity.y) * movementModifier;
 		}
+
+		//Right Acceleration
 		else if (moving == "right")
-        {
-			body.velocity = new Vector2(body.velocity.x + acceleration, body.velocity.y);
+		{
+			body.velocity = new Vector2(body.velocity.x + acceleration, body.velocity.y) * movementModifier;
 		}
-        else
-        {
+
+		else
+		{
 			//Left decceleration
 			if (body.velocity.x > 0)
 			{
-				body.velocity = new Vector2(body.velocity.x - decceleration, body.velocity.y);
+				body.velocity = new Vector2(body.velocity.x - decceleration, body.velocity.y) * movementModifier;
 				if (body.velocity.x < 0)
 				{
-					body.velocity = new Vector2(0, body.velocity.y);
+					body.velocity = new Vector2(0, body.velocity.y) * movementModifier;
 				}
 			}
 
 			//Right decceleration
 			if (body.velocity.x < 0)
 			{
-				body.velocity = new Vector2(body.velocity.x + decceleration, body.velocity.y);
+				body.velocity = new Vector2(body.velocity.x + decceleration, body.velocity.y) * movementModifier;
 				if (body.velocity.x > 0)
 				{
-					body.velocity = new Vector2(0, body.velocity.y);
+					body.velocity = new Vector2(0, body.velocity.y) * movementModifier;
 				}
 			}
+		}
+
+		//Acid projectile detection (Yes this requires its own special case)
+		if (hitbyacid)
+		{
+			if (acidLevel < 4)
+			{
+				acidLevel += 1;
+			}
+			StopAllCoroutines();
+			StartCoroutine(acidTick(10, 0.5f));
+			hitbyacid = false;
 		}
 	}
 
 
-	//Check if were on the ground
+	//Check if we're on the ground
 	private bool OnGround()
 	{
 		Vector2 hitboxSize = boxCollider.bounds.size;
@@ -181,5 +203,15 @@ public class PlayerMovement : MonoBehaviour
 		//I have absolutely no clue how it also detects left but it seems to work so idfk
 		RaycastHit2D rightCheck = Physics2D.BoxCast(boxCollider.bounds.center, hitboxSize, 0, Vector2.right, 0.1f, platformLayer);
 		return rightCheck.collider != null;
+	}
+
+	public IEnumerator acidTick(float acidDuration, float acidInterval)
+    {
+		for (int i = 0; i < acidDuration; i++)
+        {
+			hp -= acidLevel;
+			yield return new WaitForSeconds(acidInterval);
+        }
+		acidLevel = 0;
 	}
 }

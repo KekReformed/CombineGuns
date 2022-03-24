@@ -1,10 +1,13 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class GunRotation : MonoBehaviour
+public class GunRotation : MonoBehaviourPun
 {
 
     void Update()
     {
+        if (!photonView.IsMine) return;
+
         Vector3 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector3 lookAt = mouseScreenPosition;

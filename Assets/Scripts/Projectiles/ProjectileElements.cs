@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Unity.Netcode;
 public class ProjectileElements : MonoBehaviour
 {
 
@@ -51,26 +51,42 @@ public class ProjectileElements : MonoBehaviour
         {
             bounceLimit = 0;
         }
+        else
+        {
+            bounceLimit = 2;
+        }
     }
-
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"Touched a wall! my element is {element}");
         if (element == "Fire")
         {
-            LayerMask mask = LayerMask.GetMask("Player") | LayerMask.GetMask("Platform");
+            LayerMask mask = 3 | 6;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, mask);
             Instantiate(explosionSprite,transform.position,transform.rotation);
             foreach (Collider2D hit in colliders)
             {
-                hit.GetComponent<PlayerMovement>().hp -= damage;
+                if (hit.gameObject.layer == 3)
+                {
+                    hit.GetComponent<PlayerMovement>().hp -= damage;
+                }
             }
             Destroy(gameObject);
         }
 
-        if (element == "Ice")
+        else if (element == "Ice")
         {
-            LayerMask mask = LayerMask.GetMask("Player");
-            collision.collider.GetComponent<PlayerMovement>().movementReduction += 0.05f;
+            if (collision.gameObject.layer == 3){
+                collision.GetComponent<PlayerMovement>().movementReduction += 0.05f;
+            }
+        }
+
+        else if (element == "Acid")
+        {
+            if (collision.GetComponent<PlayerMovement>())
+            {
+                collision.GetComponent<PlayerMovement>().hitbyacid = true;
+            }
         }
     }
 }

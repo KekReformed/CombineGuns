@@ -13,7 +13,7 @@ public class ChargedSniperShot : BasicProjectile
     private new void Start()
     {
         layerMask = LayerMask.GetMask("Platform","Player");
-        Vector3 fireTargetPosition = new Vector2(fireTarget.position.x, fireTarget.position.y);
+        Vector3 fireTargetPosition = new Vector2(fireTarget.x, fireTarget.y);
         fireTargetVector = -(transform.position - fireTargetPosition);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, fireTargetVector, Mathf.Infinity, layerMask);
 

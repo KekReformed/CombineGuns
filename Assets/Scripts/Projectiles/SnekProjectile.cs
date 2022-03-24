@@ -41,13 +41,13 @@ public class SnekProjectile : BasicProjectile
             return;
         }
 
-        if (onGround())
+        if (OnGround())
         {
             body.AddForce(body.mass * (acceleration * direction));
         }
     }
 
-    private bool onGround()
+    private bool OnGround()
     {
         Vector2 hitboxSize = boxCollider.bounds.size;
         hitboxSize.x *= 0.75f;

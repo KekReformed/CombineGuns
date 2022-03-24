@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviourPun
 {
 	[SerializeField] private float attackCooldown;
 	[SerializeField] private float burstInterval;
@@ -14,12 +15,6 @@ public class Gun : MonoBehaviour
 	[SerializeField] private GameObject chargedBulletPrefab;
 	[SerializeField] private Rigidbody2D playerBody;
 	[SerializeField] private PlayerMovement player;
-	[SerializeField] private bool boltAction;
-	[SerializeField] private bool multishot;
-	[SerializeField] private bool semiAuto;
-	[SerializeField] private bool burst;
-	[SerializeField] private bool automatic;
-	[SerializeField] private string element;
 	
 
 	private Transform firePoint;
@@ -30,8 +25,14 @@ public class Gun : MonoBehaviour
 	private float damageModifier = 1;
 	private float recoilModifier = 1;
 	private bool resetAccelerations = true;
+	private bool boltAction;
+	private bool multishot;
+	private bool semiAuto;
+	private bool burst;
+	private bool automatic;
+	private string element;
 
-	private void Awake()
+	private void Start()
 	{
 		cooldownTimer = attackCooldown;
 		firePoint = transform.Find("FirePoint");
@@ -40,12 +41,20 @@ public class Gun : MonoBehaviour
 		{
 			Debug.Log("You need an object called FirePoint!!!");
 		}
+
+		element = PlayerPrefs.GetString("Element","Fire");
+		automatic = PlayerPrefs.GetInt("Auto", 0) == 1;
+		multishot = PlayerPrefs.GetInt("Multishot", 0) == 1;
+		semiAuto = PlayerPrefs.GetInt("SemiAuto", 1) == 1;
+		burst = PlayerPrefs.GetInt("Burst", 0) == 1;
+		boltAction = PlayerPrefs.GetInt("BoltAction", 0) == 1;
+
+		SetProjectile(PlayerPrefs.GetString("Projectile","Orbital"));
 		SetModifiers();
 	}
 
 	private void Update()
 	{
-
 
 		if (cooldownTimer > attackCooldown)
 		{
@@ -93,7 +102,7 @@ public class Gun : MonoBehaviour
 	
 	private void Shoot(float recoil,bool burst, bool multishot, bool charged)
 	{
-		Vector2 fireTargetPosition = new Vector2(transform.Find("FireTarget").position.x, transform.Find("FireTarget").position.y);
+		Vector2 fireTargetPosition = transform.Find("FireTarget").position;
 		playerBody.velocity += (fireTargetPosition - playerBody.position) * -recoil;
 		cooldownTimer = 0;
 		recoilTimer = 0;
@@ -107,50 +116,50 @@ public class Gun : MonoBehaviour
 
 		if (burst)
 		{
-			StartCoroutine(Burst(transform.Find("FireTarget"), charged));
+			StartCoroutine(Burst(transform.Find("FireTarget").position, charged));
 		}
 
         else
         {
-			Pew(transform.Find("FireTarget"), charged);
+			photonView.RPC("Pew", RpcTarget.All,transform.Find("FireTarget").position, charged);
 		}
 
 		if (multishot)
 		{
 			if (burst)
 			{
-				StartCoroutine(Burst(transform.Find("FireTargetShotgunUppist"), charged));
-				StartCoroutine(Burst(transform.Find("FireTargetShotgunUpper"), charged));
-				StartCoroutine(Burst(transform.Find("FireTargetShotgunLower"), charged));
-				StartCoroutine(Burst(transform.Find("FireTargetShotgunLowist"), charged));
+				StartCoroutine(Burst(transform.Find("FireTargetShotgunUppist").position, charged));
+				StartCoroutine(Burst(transform.Find("FireTargetShotgunUpper").position, charged));
+				StartCoroutine(Burst(transform.Find("FireTargetShotgunLower").position, charged));
+				StartCoroutine(Burst(transform.Find("FireTargetShotgunLowist").position, charged));
 			}
             else
             {
-				Pew(transform.Find("FireTargetShotgunUppist"), charged);
-				Pew(transform.Find("FireTargetShotgunUpper"), charged);
-				Pew(transform.Find("FireTargetShotgunLower"), charged);
-				Pew(transform.Find("FireTargetShotgunLowist"), charged);
+				photonView.RPC("Pew", RpcTarget.All, transform.Find("FireTargetShotgunUppist").position,charged);
+				photonView.RPC("Pew", RpcTarget.All, transform.Find("FireTargetShotgunUpper").position, charged);
+				photonView.RPC("Pew", RpcTarget.All, transform.Find("FireTargetShotgunLower").position, charged);
+				photonView.RPC("Pew", RpcTarget.All, transform.Find("FireTargetShotgunLowist").position, charged);
 			}
 		}
 	}
 
 
-	private void Pew(Transform fireTarget, bool charged)
+	[PunRPC]
+	private void Pew(Vector3 fireTarget, bool charged)
     {
-		if (charged)
+        if (charged)
         {
-			GameObject bulletClone = Instantiate(chargedBulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bulletClone = Instantiate(chargedBulletPrefab, firePoint.position, firePoint.rotation);
 			SetParameters(bulletClone, fireTarget, bulletSpeed);
 		}
         else
         {
-			GameObject bulletClone = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bulletClone = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 			SetParameters(bulletClone, fireTarget, bulletSpeed);
 		}
-	}
+    }
 
-
-	private void SetParameters(GameObject bulletClone, Transform fireTarget, float bulletSpeed)
+	private void SetParameters(GameObject bulletClone, Vector3 fireTarget, float bulletSpeed)
     {
 		bulletClone.GetComponent<BasicProjectile>().fireTarget = fireTarget;
 		bulletClone.GetComponent<BasicProjectile>().bulletSpeed = bulletSpeed;
@@ -203,13 +212,47 @@ public class Gun : MonoBehaviour
 		recoilTime *= recoilModifier * 2;
 	}
 
-	IEnumerator Burst(Transform fireTarget, bool charged)
+	//DON't COPY THIS OVER IT DOESN'T WORK
+	private void SetProjectile(string projectile)
+    {
+		if (projectile == "Orbital")
+        {
+			bulletPrefab = Resources.Load<GameObject>("OrbiterShot");
+			chargedBulletPrefab = Resources.Load<GameObject>("ChargedOrbiterShot");
+		}
+
+		else if(projectile == "Rebound")
+        {
+			bulletPrefab = Resources.Load<GameObject>("ReboundShot");
+			chargedBulletPrefab = Resources.Load<GameObject>("ChargedReboundShot");
+		}
+
+		else if (projectile == "Sniper")
+		{
+			bulletPrefab = Resources.Load<GameObject>("SniperShot");
+			chargedBulletPrefab = Resources.Load<GameObject>("ChargedSniperShot");
+		}
+
+		else if (projectile == "Snake")
+		{
+			bulletPrefab = Resources.Load<GameObject>("Snek Head");
+			chargedBulletPrefab = Resources.Load<GameObject>("Charged Snek Head");
+		}
+
+        else
+        {
+			Debug.Log("I've been given the wrong projectile!");
+        }
+	}
+
+	[PunRPC]
+	IEnumerator Burst(Vector3 fireTarget, bool charged)
 	{
 		if (charged)
         {
 			for (int i = 0; i < 3; i++)
 			{
-				GameObject bulletClone = Instantiate(chargedBulletPrefab, firePoint.position, firePoint.rotation);
+				GameObject bulletClone = PhotonNetwork.Instantiate(chargedBulletPrefab.name, firePoint.position, firePoint.rotation);
 				SetParameters(bulletClone, fireTarget, bulletSpeed);
 				yield return new WaitForSeconds(burstInterval);
 			}
@@ -219,7 +262,7 @@ public class Gun : MonoBehaviour
         {
 			for (int i = 0; i < 3; i++)
 			{
-				GameObject bulletClone = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+				GameObject bulletClone = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation);
 				SetParameters(bulletClone, fireTarget, bulletSpeed);
 				yield return new WaitForSeconds(burstInterval);
 			}

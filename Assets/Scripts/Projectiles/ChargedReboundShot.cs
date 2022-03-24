@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChargedReboundShot : BasicProjectile
@@ -22,7 +20,7 @@ public class ChargedReboundShot : BasicProjectile
             this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 180);
 
             GameObject bulletClone = Instantiate(bulletPrefab,transform.position,transform.rotation);
-            bulletClone.GetComponent<BasicProjectile>().fireTarget = transform.Find("ReturnPoint");
+            bulletClone.GetComponent<BasicProjectile>().fireTarget = transform.Find("ReturnPoint").position;
             bulletClone.GetComponent<BasicProjectile>().bulletSpeed = bulletSpeed*0.33f;
 
             fired = true;
